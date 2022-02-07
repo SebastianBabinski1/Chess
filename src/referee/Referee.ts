@@ -1,4 +1,11 @@
-import { PieceType, TeamType, Piece, Position } from "../Constants";
+import {
+  PieceType,
+  TeamType,
+  Piece,
+  Position,
+  allPositions,
+  samePosition,
+} from "../Constants";
 import { bishopMove } from "./rules/BishopRules";
 
 import { kingMove, knightMove, pawnMove, queenMove, rookMove } from "./rules";
@@ -38,7 +45,6 @@ export default class Referee {
   }
 
   // TODO
-  // Pawn promotion!
   // Prevent to move king into danger
   // Add castling
   // Add check
@@ -53,6 +59,7 @@ export default class Referee {
     boardState: Piece[]
   ) {
     let validMove = false;
+
     switch (type) {
       case PieceType.PAWN:
         validMove = pawnMove(
@@ -103,5 +110,114 @@ export default class Referee {
         );
     }
     return validMove;
+  }
+
+  possibleMoves(
+    initialPosition: Position,
+    desiredPosition: Position[],
+    type: PieceType,
+    team: TeamType,
+    boardState: Piece[]
+  ) {
+    let possibleMoves: Position[] = [];
+
+    switch (type) {
+      case PieceType.PAWN:
+        desiredPosition.forEach((piece) => {
+          let validMove = pawnMove(initialPosition, piece, team, boardState);
+          const isEnPassantMove = this.isEnPassantMove(
+            initialPosition,
+            piece,
+            PieceType.PAWN,
+            team,
+            boardState
+          );
+          if (validMove === true || isEnPassantMove === true) {
+            possibleMoves.push(piece);
+          }
+        });
+        break;
+      case PieceType.KNIGHT:
+        desiredPosition.forEach((piece) => {
+          let validMove = knightMove(initialPosition, piece, team, boardState);
+          if (validMove === true) {
+            possibleMoves.push(piece);
+          }
+        });
+        break;
+      case PieceType.BISHOP:
+        desiredPosition.forEach((piece) => {
+          let validMove = bishopMove(initialPosition, piece, team, boardState);
+          if (validMove === true) {
+            possibleMoves.push(piece);
+          }
+        });
+        break;
+      case PieceType.ROOK:
+        desiredPosition.forEach((piece) => {
+          let validMove = rookMove(initialPosition, piece, team, boardState);
+          if (validMove === true) {
+            possibleMoves.push(piece);
+          }
+        });
+        break;
+      case PieceType.QUEEN:
+        desiredPosition.forEach((piece) => {
+          let validMove = queenMove(initialPosition, piece, team, boardState);
+          if (validMove === true) {
+            possibleMoves.push(piece);
+          }
+        });
+        // console.log("Queens possible moves: ");
+        // console.log(possibleMoves);
+        break;
+      case PieceType.KING:
+        desiredPosition.forEach((piece) => {
+          let validMove = kingMove(initialPosition, piece, team, boardState);
+          if (validMove === true) {
+            possibleMoves.push(piece);
+          }
+        });
+        break;
+    }
+    return possibleMoves;
+  }
+
+  allPawnsPossibleMoves(desiredPosition: Position[], boardState: Piece[]) {
+    let allPossibleMoves: Position[] = [];
+
+    boardState.forEach((piece, index) => {
+      const possibleMoves = this.possibleMoves(
+        piece.position,
+        desiredPosition,
+        piece.type,
+        piece.team,
+        boardState
+      );
+      allPossibleMoves = allPossibleMoves.concat(possibleMoves);
+    });
+    return allPossibleMoves;
+  }
+
+  isCheck(boardState: Piece[]): TeamType | undefined {
+    const checkingPositions = allPositions();
+
+    const allPawnsPossibleMoves = this.allPawnsPossibleMoves(
+      checkingPositions,
+      boardState
+    );
+
+    let isCheck;
+    allPawnsPossibleMoves.forEach((position) => {
+      boardState.forEach((piece) => {
+        if (
+          piece.type === PieceType.KING &&
+          samePosition(position, piece.position)
+        ) {
+          isCheck = piece.team;
+        }
+      });
+    });
+    return isCheck;
   }
 }

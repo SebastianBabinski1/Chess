@@ -20,7 +20,7 @@
 #pawn-promotion-modal > .modal-body {
   position: absolute;
   top: calc(50% - 150px);
-  left: calc(50% - 400px);
+  left: calc(50% - 336px);
   display: flex;
   align-items: center;
   justify-content: space-around;

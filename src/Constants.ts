@@ -12,6 +12,11 @@ export interface Position {
   y: number;
 }
 
+export interface CheckState {
+  white: boolean;
+  black: boolean;
+}
+
 export enum PieceType {
   PAWN,
   BISHOP,
@@ -32,6 +37,11 @@ export interface Piece {
   type: PieceType;
   team: TeamType;
   enPassant?: boolean;
+}
+
+export interface CapturedPieces {
+  white: number[];
+  black: number[];
 }
 
 export const initialBoardState: Piece[] = [
@@ -228,3 +238,13 @@ export const initialBoardState: Piece[] = [
     team: TeamType.OUR,
   },
 ];
+
+export const allPositions = () => {
+  let positions: Position[] = [];
+  for (let i = 0; i < 8; i++) {
+    for (let j = 0; j < 8; j++) {
+      positions.push({ x: i, y: j });
+    }
+  }
+  return positions;
+};

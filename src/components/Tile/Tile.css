@@ -32,3 +32,7 @@
 .tile .chess-piece:active {
   cursor: grabbing;
 }
+
+.possible {
+  background-color: rgb(127, 127, 127);
+}

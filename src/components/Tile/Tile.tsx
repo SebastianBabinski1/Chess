@@ -1,29 +1,38 @@
 import "./Tile.css";
 
 interface Props {
+  id: string;
   image?: string;
   number: number;
+  team?: number;
 }
 
-export default function Tile({ number, image }: Props) {
+export default function Tile({ id, number, image, team }: Props) {
+  let currentPlayer;
+  if (team === 0) {
+    currentPlayer = "black-piece";
+  } else if (team === 1) {
+    currentPlayer = "white-piece";
+  }
+
   if (number % 2 === 0) {
     return (
-      <div className="tile black-tile">
+      <div id={id} className="tile black-tile">
         {image && (
           <div
             style={{ backgroundImage: `url(${image})` }}
-            className="chess-piece"
+            className={`chess-piece ${currentPlayer}`}
           ></div>
         )}
       </div>
     );
   } else {
     return (
-      <div className="tile white-tile">
+      <div id={id} className="tile white-tile">
         {image && (
           <div
             style={{ backgroundImage: `url(${image})` }}
-            className="chess-piece"
+            className={`chess-piece ${currentPlayer}`}
           ></div>
         )}
       </div>
