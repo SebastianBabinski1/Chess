@@ -36,6 +36,7 @@ const Chessboard = () => {
   const referee = new Referee();
 
   function grabPiece(e: React.MouseEvent) {
+    const checkingPositions = allPositions();
     const element = e.target as HTMLElement;
     const chessboard = chessboardRef.current;
     let currentTeam;
@@ -60,34 +61,57 @@ const Chessboard = () => {
       element.style.left = `${x}px`;
       element.style.top = `${y}px`;
 
-      setActivePiece(element);
-    }
-  }
+      const currentPieceType = (): PieceType => {
+        let currentPieceType = PieceType.PAWN;
+        pieces.forEach((piece) => {
+          if (samePosition(piece.position, { x: grabX, y: grabY })) {
+            currentPieceType = piece.type;
+          }
+        });
+        return currentPieceType;
+      };
 
-  function movePiece(e: React.MouseEvent) {
-    const chessboard = chessboardRef.current;
-    const checkingPositions = allPositions();
-
-    const currentPieceType = (): PieceType => {
-      let currentPieceType = PieceType.PAWN;
-      pieces.forEach((piece) => {
-        if (samePosition(piece.position, grabPosition)) {
-          currentPieceType = piece.type;
-        }
-      });
-      return currentPieceType;
-    };
-
-    if (activePiece && chessboard) {
       const possibleMoves = referee.possibleMoves(
-        grabPosition,
+        { x: grabX, y: grabY },
         checkingPositions,
         currentPieceType(),
         currentPlayer,
         pieces
       );
+
+      const hints = possibleMoves.reduce((results, move) => {
+        let boardStateCopy: Piece[] = JSON.parse(JSON.stringify(pieces));
+        let currentPieceIndex = boardStateCopy.findIndex((p) =>
+          samePosition(p.position, { x: grabX, y: grabY })
+        );
+        let enemyPieceIndex = boardStateCopy.findIndex((p) =>
+          samePosition(p.position, move)
+        );
+        if (
+          enemyPieceIndex !== -1 &&
+          boardStateCopy[enemyPieceIndex].team !== currentPlayer
+        ) {
+          let boardStateWithoutAttackedPiece: Piece[] = JSON.parse(
+            JSON.stringify(pieces)
+          );
+          boardStateWithoutAttackedPiece.splice(enemyPieceIndex, 1);
+          const isCheck = referee.isCheck(boardStateWithoutAttackedPiece);
+          if (isCheck !== currentPlayer) {
+            results.push(move);
+          }
+        }
+
+        boardStateCopy[currentPieceIndex].position = move;
+
+        const isCheck = referee.isCheck(boardStateCopy);
+        if (isCheck !== currentPlayer) {
+          results.push(move);
+        }
+        return results;
+      }, [] as Position[]);
+
       const ids: string[] = [];
-      possibleMoves.forEach((position) => {
+      hints.forEach((position) => {
         const id = "" + position.y + position.x;
         ids.push(id);
       });
@@ -97,6 +121,14 @@ const Chessboard = () => {
         tile?.classList.add("possible");
       });
 
+      setActivePiece(element);
+    }
+  }
+
+  function movePiece(e: React.MouseEvent) {
+    const chessboard = chessboardRef.current;
+
+    if (activePiece && chessboard) {
       const minX = chessboard.offsetLeft - 25;
       const minY = chessboard.offsetTop - 25;
       const maxX = chessboard.offsetLeft + chessboard.clientWidth - 75;

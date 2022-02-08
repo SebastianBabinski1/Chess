@@ -168,8 +168,6 @@ export default class Referee {
             possibleMoves.push(piece);
           }
         });
-        // console.log("Queens possible moves: ");
-        // console.log(possibleMoves);
         break;
       case PieceType.KING:
         desiredPosition.forEach((piece) => {
