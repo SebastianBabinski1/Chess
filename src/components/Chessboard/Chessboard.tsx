@@ -35,8 +35,9 @@ const Chessboard = () => {
   const modalRef = useRef<HTMLDivElement>(null);
   const referee = new Referee();
 
+  const checkingPositions = allPositions();
+
   function grabPiece(e: React.MouseEvent) {
-    const checkingPositions = allPositions();
     const element = e.target as HTMLElement;
     const chessboard = chessboardRef.current;
     let currentTeam;
@@ -262,6 +263,59 @@ const Chessboard = () => {
 
           const isCheck = referee.isCheck(updatedPieces);
           if (isCheck !== currentPlayer) {
+            // HAS ENEMY PLAYER POSSIBLE MOVE TO AVOID CHECK?
+            const allPossibleEnemyMovesAfterUpdate = updatedPieces.reduce(
+              (results, piece) => {
+                if (piece.team !== currentPlayer) {
+                  let possibleMoves = referee.possibleMoves(
+                    piece.position,
+                    checkingPositions,
+                    piece.type,
+                    piece.team,
+                    updatedPieces
+                  );
+
+                  if (possibleMoves.length > 0) {
+                    possibleMoves.forEach((possibleMove) => {
+                      const piecesCopy: Piece[] = JSON.parse(
+                        JSON.stringify(updatedPieces)
+                      );
+
+                      const indexOfPiece = piecesCopy.forEach((p, index) => {
+                        if (samePosition(p.position, piece.position) === true) {
+                          piecesCopy[index].position = possibleMove;
+                          const isCheckAfterPossibleMove =
+                            referee.isCheck(piecesCopy);
+                          if (
+                            isCheckAfterPossibleMove === undefined ||
+                            isCheckAfterPossibleMove === currentPlayer
+                          ) {
+                            results.push(piece);
+                          }
+                        }
+                      });
+                    });
+                  }
+                }
+                return results;
+              },
+              [] as Piece[]
+            );
+
+            if (allPossibleEnemyMovesAfterUpdate.length > 0) {
+              console.log("Są możliwe ruchy przeciwnika");
+            } else {
+              // Before we check if isCheck is not currentPlayer, so now if isCheck is undefined its tie
+              if (isCheck === undefined) {
+                const modal = document.getElementById("tie-modal");
+                modal?.classList.remove("hidden");
+              } else {
+                console.log("Szach mat!");
+                const modal = document.getElementById("check-mate-modal");
+                modal?.classList.remove("hidden");
+              }
+            }
+
             setPieces(updatedPieces);
             setCurrentPlayer(
               currentPlayer === TeamType.OUR ? TeamType.OPPONENT : TeamType.OUR
