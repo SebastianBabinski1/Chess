@@ -14,12 +14,16 @@ import {
   samePosition,
   CapturedPieces,
   allPositions,
-  CheckState,
 } from "../../Constants";
 import CurrentPlayer from "../CurrentPlayer/CurrentPlayer";
 import CapturedPawns from "../CapturedPawns/CapturedPawns";
+import { RulesModal } from "../RulesModal/RulesModal";
 
-const Chessboard = () => {
+interface Props {
+  mode: string;
+}
+
+const Chessboard = ({ mode }: Props) => {
   const [capturedPawns, setCapturedPawns] = useState<CapturedPieces>({
     white: [],
     black: [],
@@ -36,7 +40,6 @@ const Chessboard = () => {
   const referee = new Referee();
 
   const checkingPositions = allPositions();
-
   function grabPiece(e: React.MouseEvent) {
     const element = e.target as HTMLElement;
     const chessboard = chessboardRef.current;
@@ -79,48 +82,51 @@ const Chessboard = () => {
         currentPlayer,
         pieces
       );
-
-      const hints = possibleMoves.reduce((results, move) => {
-        let boardStateCopy: Piece[] = JSON.parse(JSON.stringify(pieces));
-        let currentPieceIndex = boardStateCopy.findIndex((p) =>
-          samePosition(p.position, { x: grabX, y: grabY })
-        );
-        let enemyPieceIndex = boardStateCopy.findIndex((p) =>
-          samePosition(p.position, move)
-        );
-        if (
-          enemyPieceIndex !== -1 &&
-          boardStateCopy[enemyPieceIndex].team !== currentPlayer
-        ) {
-          let boardStateWithoutAttackedPiece: Piece[] = JSON.parse(
-            JSON.stringify(pieces)
+      if (mode === "easy") {
+        const hints = possibleMoves.reduce((results, move) => {
+          let boardStateCopy: Piece[] = JSON.parse(JSON.stringify(pieces));
+          let currentPieceIndex = boardStateCopy.findIndex((p) =>
+            samePosition(p.position, { x: grabX, y: grabY })
           );
-          boardStateWithoutAttackedPiece.splice(enemyPieceIndex, 1);
-          const isCheck = referee.isCheck(boardStateWithoutAttackedPiece);
+          let enemyPieceIndex = boardStateCopy.findIndex((p) =>
+            samePosition(p.position, move)
+          );
+          if (
+            enemyPieceIndex !== -1 &&
+            boardStateCopy[enemyPieceIndex].team !== currentPlayer
+          ) {
+            let boardStateWithoutAttackedPiece: Piece[] = JSON.parse(
+              JSON.stringify(pieces)
+            );
+            boardStateWithoutAttackedPiece.splice(enemyPieceIndex, 1);
+            const isCheck = referee.isCheck(boardStateWithoutAttackedPiece);
+            if (isCheck !== currentPlayer) {
+              results.push(move);
+            }
+          }
+
+          boardStateCopy[currentPieceIndex].position = move;
+
+          const isCheck = referee.isCheck(boardStateCopy);
           if (isCheck !== currentPlayer) {
             results.push(move);
           }
-        }
+          return results;
+        }, [] as Position[]);
 
-        boardStateCopy[currentPieceIndex].position = move;
-
-        const isCheck = referee.isCheck(boardStateCopy);
-        if (isCheck !== currentPlayer) {
-          results.push(move);
-        }
-        return results;
-      }, [] as Position[]);
-
-      const ids: string[] = [];
-      hints.forEach((position) => {
-        const id = "" + position.y + position.x;
-        ids.push(id);
-      });
-      setMovesHint(ids);
-      ids.forEach((id) => {
-        const tile = document.getElementById(id);
-        tile?.classList.add("possible");
-      });
+        const ids: string[] = [];
+        hints.forEach((position) => {
+          const id = "" + position.y + position.x;
+          ids.push(id);
+        });
+        setMovesHint(ids);
+        ids.forEach((id) => {
+          const tile = document.getElementById(id);
+          tile?.classList.add("possible");
+        });
+      } else {
+        console.log(mode);
+      }
 
       setActivePiece(element);
     }
@@ -307,10 +313,11 @@ const Chessboard = () => {
             } else {
               // Before we check if isCheck is not currentPlayer, so now if isCheck is undefined its tie
               if (isCheck === undefined) {
+                // Tie
                 const modal = document.getElementById("tie-modal");
                 modal?.classList.remove("hidden");
               } else {
-                console.log("Szach mat!");
+                // Check mate
                 const modal = document.getElementById("check-mate-modal");
                 modal?.classList.remove("hidden");
               }
@@ -412,7 +419,18 @@ const Chessboard = () => {
   }
   return (
     <>
-      <CurrentPlayer team={currentPlayer} />
+      <div className="left-wrapper">
+        <CurrentPlayer team={currentPlayer} />
+        <button
+          type="button"
+          className="btn btn-secondary btn-lg"
+          data-toggle="modal"
+          data-target="#rules_modal"
+        >
+          Rules
+        </button>
+        <RulesModal />
+      </div>
       <div id="pawn-promotion-modal" className="hidden" ref={modalRef}>
         <div className="modal-body">
           <img

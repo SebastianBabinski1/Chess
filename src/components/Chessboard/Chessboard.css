@@ -4,7 +4,6 @@
   grid-template-rows: repeat(8, 100px);
   width: 800px;
   height: 800px;
-  background-color: blue;
 }
 
 #pawn-promotion-modal {
@@ -38,4 +37,14 @@
 #pawn-promotion-modal > .modal-body > img:hover {
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.3);
+}
+
+.left-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.left-wrapper .btn {
+  margin-top: 20px;
+  margin-right: 10px;
 }
