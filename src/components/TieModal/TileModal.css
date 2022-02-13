@@ -1,28 +1,13 @@
-#tie-modal {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+.modal-header {
+  align-self: center;
 }
 
-#tie-modal > .tie-modal_body {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  color: white;
-  top: calc(50% - 150px);
-  left: calc(50% - 336px);
+.modal-body {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  height: 300px;
-  width: 800px;
-  background-color: rgba(127, 127, 127, 0.8);
+  justify-content: center;
 }
 
-#tie-modal.hidden {
-  display: none;
-}
-
-.tie-modal_body > img {
-  width: 100px;
+.modal-body img {
+  width: 80px;
 }

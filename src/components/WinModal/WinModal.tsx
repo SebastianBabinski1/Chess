@@ -1,13 +1,18 @@
 import { useGlobalContext } from "../../App";
-import "./TileModal.css";
+import "./WinModal.css";
 
-export const TieModal = () => {
+interface Props {
+  image: string;
+  team: string;
+}
+
+export const WinModal = ({ image, team }: Props) => {
   const { start, setStart } = useGlobalContext();
 
   return (
     <div
       className="modal fade hidden"
-      id="tie-modal"
+      id="win-modal"
       tabIndex={-1}
       role="dialog"
       aria-labelledby="exampleModalCenterTitle"
@@ -17,12 +22,12 @@ export const TieModal = () => {
         <div className="modal-content">
           <div className="modal-header">
             <h4 className="modal-title" id="exampleModalCenterTitle">
-              Tie!
+              Congratulation!
             </h4>
           </div>
           <div className="modal-body">
-            <img src={`assets/img/handshake.webp`} alt="Tie" />
-            <p>It was a fascinating game!</p>
+            <img src={image} alt="Tie" />
+            <p>{team} wins this game!</p>
           </div>
           <div className="modal-footer">
             <button

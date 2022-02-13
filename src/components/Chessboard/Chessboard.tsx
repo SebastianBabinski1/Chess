@@ -18,12 +18,15 @@ import {
 import CurrentPlayer from "../CurrentPlayer/CurrentPlayer";
 import CapturedPawns from "../CapturedPawns/CapturedPawns";
 import { RulesModal } from "../RulesModal/RulesModal";
+import { useGlobalContext } from "../../App";
 
 interface Props {
   mode: string;
 }
 
 const Chessboard = ({ mode }: Props) => {
+  const { start, setStart } = useGlobalContext();
+
   const [capturedPawns, setCapturedPawns] = useState<CapturedPieces>({
     white: [],
     black: [],
@@ -314,12 +317,15 @@ const Chessboard = ({ mode }: Props) => {
               // Before we check if isCheck is not currentPlayer, so now if isCheck is undefined its tie
               if (isCheck === undefined) {
                 // Tie
-                const modal = document.getElementById("tie-modal");
-                modal?.classList.remove("hidden");
+                $("#tie-modal").modal("show");
+                // const modal = document.getElementById("tie-modal");
+                // modal?.classList.remove("hidden");
               } else {
                 // Check mate
-                const modal = document.getElementById("check-mate-modal");
-                modal?.classList.remove("hidden");
+                console.log("checkmate");
+                $("#win-modal").modal("show");
+                // const modal = document.getElementById("check-mate-modal");
+                // modal?.classList.remove("hidden");
               }
             }
 
@@ -420,6 +426,20 @@ const Chessboard = ({ mode }: Props) => {
   return (
     <>
       <div className="left-wrapper">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="40"
+          height="40"
+          fill="white"
+          className="bi bi-arrow-left-circle"
+          viewBox="0 0 16 16"
+          onClick={() => setStart(!start)}
+        >
+          <path
+            fillRule="evenodd"
+            d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"
+          />
+        </svg>
         <CurrentPlayer team={currentPlayer} />
         <button
           type="button"

@@ -48,3 +48,10 @@
   margin-top: 20px;
   margin-right: 10px;
 }
+
+.bi-arrow-left-circle {
+  justify-self: center;
+  align-self: center;
+  margin-bottom: 50px;
+  cursor: pointer;
+}

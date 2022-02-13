@@ -1,6 +1,9 @@
+#rules_modal .modal-dialog {
+  max-width: max-content;
+}
+
 .modal-content {
   color: black;
-  width: max-content;
   padding-left: 10px;
   padding-right: 10px;
 }
