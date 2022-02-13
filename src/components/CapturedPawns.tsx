@@ -1,6 +1,4 @@
-import { ReactElement } from "react";
-import { TeamType } from "../../Constants";
-import "./CapturedPawns.css";
+import { TeamType } from "../Constants";
 
 interface Props {
   team?: TeamType;

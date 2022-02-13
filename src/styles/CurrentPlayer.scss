@@ -1,0 +1,31 @@
+.current-player-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+    color: white;
+    font-size: large;
+    font-weight: 600;
+    max-width: max-content;
+  }
+  
+  .current-player {
+    background-color: rgba(127, 127, 127, 0.8);
+    border-radius: 100%;
+  }
+  
+  .current-player_white {
+    background-color: white;
+    margin: 10px;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+  }
+  
+  .current-player_black {
+    background-color: black;
+    margin: 10px;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+  }
+  

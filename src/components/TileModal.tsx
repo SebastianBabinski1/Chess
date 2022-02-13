@@ -1,5 +1,4 @@
-import { useGlobalContext } from "../../App";
-import "./TileModal.css";
+import { useGlobalContext } from "../App";
 
 export const TieModal = () => {
   const { start, setStart } = useGlobalContext();

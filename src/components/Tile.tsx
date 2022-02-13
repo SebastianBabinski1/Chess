@@ -1,5 +1,3 @@
-import "./Tile.css";
-
 interface Props {
   id: string;
   image?: string;

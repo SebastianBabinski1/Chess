@@ -1,5 +1,3 @@
-import "./AuthorModal.css";
-
 export const AuthorModal = () => {
   return (
     <div

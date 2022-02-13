@@ -1,7 +1,6 @@
-import "./Chessboard.css";
-import Tile from "../Tile/Tile";
+import Tile from "./Tile";
 import React, { useRef, useState } from "react";
-import Referee from "../../referee/Referee";
+import Referee from "../referee/Referee";
 import {
   VERTICAL_AXIS,
   HORIZONTAL_AXIS,
@@ -14,11 +13,11 @@ import {
   samePosition,
   CapturedPieces,
   allPositions,
-} from "../../Constants";
-import CurrentPlayer from "../CurrentPlayer/CurrentPlayer";
-import CapturedPawns from "../CapturedPawns/CapturedPawns";
-import { RulesModal } from "../RulesModal/RulesModal";
-import { useGlobalContext } from "../../App";
+} from "../Constants";
+import CurrentPlayer from "./CurrentPlayer";
+import CapturedPawns from "./CapturedPawns";
+import { RulesModal } from "./RulesModal";
+import { useGlobalContext } from "../App";
 
 interface Props {
   mode: string;

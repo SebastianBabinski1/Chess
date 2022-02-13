@@ -1,7 +1,6 @@
-import "./Menu.css";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
-import { RulesModal } from "../RulesModal/RulesModal";
-import { AuthorModal } from "../AuthorModal/AuthorModal";
+import { RulesModal } from "./RulesModal";
+import { AuthorModal } from "./AuthorModal";
 import { useState } from "react";
 
 interface Props {

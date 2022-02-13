@@ -1,5 +1,4 @@
-import { TeamType } from "../../Constants";
-import "./CurrentPlayer.css";
+import { TeamType } from "../Constants";
 
 interface Props {
   team?: TeamType;

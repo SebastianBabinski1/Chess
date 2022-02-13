@@ -1,5 +1,4 @@
-import { useGlobalContext } from "../../App";
-import "./WinModal.css";
+import { useGlobalContext } from "../App";
 
 interface Props {
   image: string;

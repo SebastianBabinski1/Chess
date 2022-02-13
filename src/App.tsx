@@ -1,9 +1,9 @@
 import React, { createContext, useContext, useState } from "react";
 import "./App.css";
-import Chessboard from "./components/Chessboard/Chessboard";
-import { Menu } from "./components/Menu/Menu";
-import { TieModal } from "./components/TieModal/TileModal";
-import { WinModal } from "./components/WinModal/WinModal";
+import Chessboard from "./components/Chessboard";
+import { Menu } from "./components/Menu";
+import { TieModal } from "./components/TileModal";
+import { WinModal } from "./components/WinModal";
 
 export type AppContextType = {
   start: boolean;

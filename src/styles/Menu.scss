@@ -1,0 +1,47 @@
+#menu {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  
+  #menu .menu_body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .menu_body .images_wrapper {
+    display: flex;
+    border-radius: 10%;
+    justify-content: center;
+  }
+  
+  .menu_body .images_wrapper img {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .menu_body .game_title {
+    font-size: 100px;
+  }
+  
+  .menu_body p {
+    font-size: 20px;
+  }
+  
+  .buttons-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  .buttons-wrapper .btn {
+    margin: 10px;
+    width: 200px;
+  }
+  

@@ -1,13 +1,272 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.captured-wrapper {
+  text-align: center;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  margin: 10px 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.captured-wrapper p {
+  margin: 0;
+  padding: 5px;
 }
+
+.captured-list {
+  display: flex;
+  justify-content: center;
+}
+
+.captured {
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+  justify-items: center;
+  align-items: center;
+}
+
+#chessboard {
+  display: grid;
+  grid-template-columns: repeat(8, 100px);
+  grid-template-rows: repeat(8, 100px);
+  width: 800px;
+  height: 800px;
+}
+
+#pawn-promotion-modal {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#pawn-promotion-modal.hidden {
+  display: none;
+}
+
+#pawn-promotion-modal > .modal-body {
+  position: absolute;
+  top: calc(50% - 150px);
+  left: calc(50% - 336px);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 300px;
+  width: 800px;
+  background-color: rgba(127, 127, 127, 0.8);
+}
+
+#pawn-promotion-modal > .modal-body > img {
+  border-radius: 50%;
+  padding: 10px;
+  height: 120px;
+}
+
+#pawn-promotion-modal > .modal-body > img:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.left-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.left-wrapper .btn {
+  margin-top: 20px;
+  margin-right: 10px;
+}
+
+.bi-arrow-left-circle {
+  justify-self: center;
+  align-self: center;
+  margin-bottom: 50px;
+  cursor: pointer;
+}
+
+.current-player-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+  color: white;
+  font-size: large;
+  font-weight: 600;
+  max-width: max-content;
+}
+
+.current-player {
+  background-color: rgba(127, 127, 127, 0.8);
+  border-radius: 100%;
+}
+
+.current-player_white {
+  background-color: white;
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+}
+
+.current-player_black {
+  background-color: black;
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+}
+
+#menu {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#menu .menu_body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu_body .images_wrapper {
+  display: flex;
+  border-radius: 10%;
+  justify-content: center;
+}
+
+.menu_body .images_wrapper img {
+  width: 100px;
+  height: 100px;
+}
+
+.menu_body .game_title {
+  font-size: 100px;
+}
+
+.menu_body p {
+  font-size: 20px;
+}
+
+.buttons-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.buttons-wrapper .btn {
+  margin: 10px;
+  width: 200px;
+}
+
+#rules_modal .modal-dialog {
+  max-width: max-content;
+}
+
+.modal-content {
+  color: black;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.rules-modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rules-modal-body h5 {
+  text-align: center;
+  padding: 10px;
+}
+
+.basic-rules-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.rule-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rule-wrapper > img {
+  width: 300px;
+}
+
+.castling-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.ending-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.dead-position-wrapper {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.modal-header {
+  align-self: center;
+}
+
+.modal-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-body img {
+  width: 80px;
+}
+
+.tile {
+  display: grid;
+  place-content: center;
+  width: 100px;
+  height: 100px;
+}
+
+.black-tile {
+  background-color: #779556;
+}
+
+.white-tile {
+  background-color: #ebecd0;
+}
+
+.tile img {
+  width: 80px;
+}
+
+.tile .chess-piece {
+  width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80px;
+}
+
+.tile .chess-piece:hover {
+  cursor: grab;
+}
+
+.tile .chess-piece:active {
+  cursor: grabbing;
+}
+
+.possible {
+  background-color: #7f7f7f;
+}
+
+/*# sourceMappingURL=index.css.map */

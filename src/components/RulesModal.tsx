@@ -1,5 +1,3 @@
-import "./RulesModal.css";
-
 export const RulesModal = () => {
   return (
     <div
