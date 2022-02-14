@@ -27,7 +27,7 @@ export const TieModal = () => {
             <button
               className="btn btn-secondary"
               onClick={() => {
-                setStart(start);
+                setStart(!start);
                 $("#tie-modal").modal("hide");
               }}
             >

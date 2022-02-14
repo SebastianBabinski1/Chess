@@ -7,41 +7,40 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-  }
-  
-  #menu .menu_body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .menu_body .images_wrapper {
-    display: flex;
-    border-radius: 10%;
-    justify-content: center;
-  }
-  
-  .menu_body .images_wrapper img {
-    width: 100px;
-    height: 100px;
-  }
-  
-  .menu_body .game_title {
-    font-size: 100px;
-  }
-  
-  .menu_body p {
-    font-size: 20px;
+
+    .menu_body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        img {
+        width: 100px;
+        height: 100px;
+        }
+
+        p {
+          font-size: 20px;
+        }
+
+        .game_title {
+          font-size: 100px;
+        }
+      }
   }
   
   .buttons-wrapper {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
+    .btn {
+      margin: 10px;
+      width: 200px;
+    }
   }
   
-  .buttons-wrapper .btn {
-    margin: 10px;
-    width: 200px;
+  .menu_body .images_wrapper {
+    display: flex;
+    border-radius: 10%;
+    justify-content: center;
   }
   

@@ -21,9 +21,10 @@ import { useGlobalContext } from "../App";
 
 interface Props {
   mode: string;
+  setPlayer: React.Dispatch<React.SetStateAction<TeamType>>;
 }
 
-const Chessboard = ({ mode }: Props) => {
+const Chessboard = ({ mode, setPlayer }: Props) => {
   const { start, setStart } = useGlobalContext();
 
   const [capturedPawns, setCapturedPawns] = useState<CapturedPieces>({
@@ -317,14 +318,11 @@ const Chessboard = ({ mode }: Props) => {
               if (isCheck === undefined) {
                 // Tie
                 $("#tie-modal").modal("show");
-                // const modal = document.getElementById("tie-modal");
-                // modal?.classList.remove("hidden");
               } else {
                 // Check mate
                 console.log("checkmate");
+                setPlayer(currentPlayer);
                 $("#win-modal").modal("show");
-                // const modal = document.getElementById("check-mate-modal");
-                // modal?.classList.remove("hidden");
               }
             }
 

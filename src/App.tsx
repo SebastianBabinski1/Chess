@@ -4,6 +4,7 @@ import Chessboard from "./components/Chessboard";
 import { Menu } from "./components/Menu";
 import { TieModal } from "./components/TileModal";
 import { WinModal } from "./components/WinModal";
+import { TeamType } from "./Constants";
 
 export type AppContextType = {
   start: boolean;
@@ -18,9 +19,9 @@ const AppContext = createContext<AppContextType>({
 export const useGlobalContext = () => useContext(AppContext);
 
 const App = () => {
-  // mode should be removed and switchState should be in Chessboard
   const [mode, setMode] = useState("normal");
   const [start, setStart] = useState(false);
+  const [player, setPlayer] = useState(TeamType.OUR);
 
   const switchState = (checkedMode: boolean) => {
     setStart(!start);
@@ -36,10 +37,9 @@ const App = () => {
       <AppContext.Provider value={{ start, setStart }}>
         {start ? (
           <>
-            {/* Here image and team should be repaired */}
-            <Chessboard mode={mode} />;
+            <Chessboard mode={mode} setPlayer={setPlayer} />;
             <TieModal />
-            <WinModal image={`assets/img/king_w.png`} team={"white"} />
+            <WinModal team={player} />
           </>
         ) : (
           <Menu switchState={switchState} />

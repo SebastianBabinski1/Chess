@@ -1,3 +1,10 @@
+.captured {
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+  justify-items: center;
+  align-items: center;
+}
 .captured-wrapper {
   text-align: center;
   color: white;
@@ -5,23 +12,13 @@
   border-radius: 20px;
   margin: 10px 0;
 }
-
 .captured-wrapper p {
   margin: 0;
   padding: 5px;
 }
-
 .captured-list {
   display: flex;
   justify-content: center;
-}
-
-.captured {
-  display: flex;
-  margin-left: 10px;
-  margin-right: 10px;
-  justify-items: center;
-  align-items: center;
 }
 
 #chessboard {
@@ -37,11 +34,9 @@
   width: 100%;
   height: 100%;
 }
-
 #pawn-promotion-modal.hidden {
   display: none;
 }
-
 #pawn-promotion-modal > .modal-body {
   position: absolute;
   top: calc(50% - 150px);
@@ -53,13 +48,12 @@
   width: 800px;
   background-color: rgba(127, 127, 127, 0.8);
 }
-
 #pawn-promotion-modal > .modal-body > img {
   border-radius: 50%;
   padding: 10px;
   height: 120px;
+  width: 120px;
 }
-
 #pawn-promotion-modal > .modal-body > img:hover {
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.3);
@@ -69,7 +63,6 @@
   display: flex;
   flex-direction: column;
 }
-
 .left-wrapper .btn {
   margin-top: 20px;
   margin-right: 10px;
@@ -82,6 +75,10 @@
   cursor: pointer;
 }
 
+.current-player {
+  background-color: rgba(127, 127, 127, 0.8);
+  border-radius: 100%;
+}
 .current-player-wrapper {
   display: flex;
   flex-direction: column;
@@ -91,12 +88,6 @@
   font-weight: 600;
   max-width: max-content;
 }
-
-.current-player {
-  background-color: rgba(127, 127, 127, 0.8);
-  border-radius: 100%;
-}
-
 .current-player_white {
   background-color: white;
   margin: 10px;
@@ -104,7 +95,6 @@
   height: 100px;
   border-radius: 100%;
 }
-
 .current-player_black {
   background-color: black;
   margin: 10px;
@@ -123,11 +113,30 @@
   align-items: center;
   justify-content: space-around;
 }
-
 #menu .menu_body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+#menu .menu_body img {
+  width: 100px;
+  height: 100px;
+}
+#menu .menu_body p {
+  font-size: 20px;
+}
+#menu .menu_body .game_title {
+  font-size: 100px;
+}
+
+.buttons-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+.buttons-wrapper .btn {
+  margin: 10px;
+  width: 200px;
 }
 
 .menu_body .images_wrapper {
@@ -136,49 +145,37 @@
   justify-content: center;
 }
 
-.menu_body .images_wrapper img {
-  width: 100px;
-  height: 100px;
-}
-
-.menu_body .game_title {
-  font-size: 100px;
-}
-
-.menu_body p {
-  font-size: 20px;
-}
-
-.buttons-wrapper {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-}
-
-.buttons-wrapper .btn {
-  margin: 10px;
-  width: 200px;
-}
-
 #rules_modal .modal-dialog {
   max-width: max-content;
 }
-
-.modal-content {
+#rules_modal .modal-dialog .modal-content {
   color: black;
   padding-left: 10px;
   padding-right: 10px;
 }
-
-.rules-modal-body {
+#rules_modal .modal-dialog .modal-content .modal-header {
+  width: 100%;
+}
+#rules_modal .modal-dialog .rules-modal-body {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
-.rules-modal-body h5 {
-  text-align: center;
+#rules_modal .modal-dialog .rules-modal-body a {
+  width: 200px;
+  margin: 10px;
+}
+#rules_modal .modal-dialog .rules-modal-body h5 {
   padding: 10px;
+}
+#rules_modal .modal-dialog .rule-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#rules_modal .modal-dialog .rule-wrapper > img {
+  width: 300px;
+  height: 300px;
 }
 
 .basic-rules-wrapper {
@@ -186,16 +183,6 @@
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
   grid-auto-rows: minmax(100px, auto);
-}
-
-.rule-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.rule-wrapper > img {
-  width: 300px;
 }
 
 .castling-wrapper {
@@ -267,6 +254,13 @@
 
 .possible {
   background-color: #7f7f7f;
+}
+
+#author_modal {
+  color: black;
+}
+#author_modal .modal-header {
+  width: 100%;
 }
 
 /*# sourceMappingURL=index.css.map */

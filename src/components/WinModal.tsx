@@ -1,13 +1,16 @@
 import { useGlobalContext } from "../App";
+import { TeamType } from "../Constants";
 
 interface Props {
-  image: string;
-  team: string;
+  team: TeamType;
 }
 
-export const WinModal = ({ image, team }: Props) => {
+export const WinModal = ({ team }: Props) => {
   const { start, setStart } = useGlobalContext();
 
+  const nameOfTeam = team === TeamType.OUR ? "White" : "Black";
+  const image =
+    team === TeamType.OUR ? "assets/img/king_w.png" : "assets/img/king_b.png";
   return (
     <div
       className="modal fade hidden"
@@ -26,14 +29,14 @@ export const WinModal = ({ image, team }: Props) => {
           </div>
           <div className="modal-body">
             <img src={image} alt="Tie" />
-            <p>{team} wins this game!</p>
+            <p>{nameOfTeam} wins this game!</p>
           </div>
           <div className="modal-footer">
             <button
               className="btn btn-secondary"
               onClick={() => {
-                setStart(start);
-                $("#tie-modal").modal("hide");
+                setStart(!start);
+                $("#win-modal").modal("hide");
               }}
             >
               Menu

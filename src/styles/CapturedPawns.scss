@@ -1,25 +1,26 @@
-.captured-wrapper {
-    text-align: center;
-    color: white;
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 20px;
-    margin: 10px 0;
-  }
-  .captured-wrapper p {
-    margin: 0;
-    padding: 5px;
-  }
+.captured {
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+  justify-items: center;
+  align-items: center;
   
-  .captured-list {
-    display: flex;
-    justify-content: center;
-  }
+  &-wrapper {
+      text-align: center;
+      color: white;
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      margin: 10px 0;
+      p {
+        margin: 0;
+        padding: 5px;
+      }
+    }
+
+    &-list {
+      display: flex;
+      justify-content: center;
+    }
+}
   
-  .captured {
-    display: flex;
-    margin-left: 10px;
-    margin-right: 10px;
-    justify-items: center;
-    align-items: center;
-  }
   
