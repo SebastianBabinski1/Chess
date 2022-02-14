@@ -56,7 +56,7 @@ const Chessboard = ({ mode, setPlayer }: Props) => {
     if (element.classList.contains(`${currentTeam}`) && chessboard) {
       const grabX = Math.floor((e.clientX - chessboard.offsetLeft) / GRID_SIZE);
       const grabY = Math.abs(
-        Math.ceil((e.clientY - chessboard.offsetTop - 800) / GRID_SIZE)
+        Math.ceil((e.clientY - chessboard.offsetTop - 640) / GRID_SIZE)
       );
       setGrabPosition({
         x: grabX,
@@ -139,12 +139,12 @@ const Chessboard = ({ mode, setPlayer }: Props) => {
     const chessboard = chessboardRef.current;
 
     if (activePiece && chessboard) {
-      const minX = chessboard.offsetLeft - 25;
-      const minY = chessboard.offsetTop - 25;
-      const maxX = chessboard.offsetLeft + chessboard.clientWidth - 75;
-      const maxY = chessboard.offsetTop + chessboard.clientHeight - 75;
-      const x = e.clientX - 50;
-      const y = e.clientY - 50;
+      const minX = chessboard.offsetLeft - 20;
+      const minY = chessboard.offsetTop - 20;
+      const maxX = chessboard.offsetLeft + chessboard.clientWidth - 60;
+      const maxY = chessboard.offsetTop + chessboard.clientHeight - 60;
+      const x = e.clientX - 40;
+      const y = e.clientY - 40;
       activePiece.style.position = "absolute";
 
       if (x < minX) {
@@ -171,7 +171,7 @@ const Chessboard = ({ mode, setPlayer }: Props) => {
     if (activePiece && chessboard) {
       const x = Math.floor((e.clientX - chessboard.offsetLeft) / GRID_SIZE);
       const y = Math.abs(
-        Math.ceil((e.clientY - chessboard.offsetTop - 800) / GRID_SIZE)
+        Math.ceil((e.clientY - chessboard.offsetTop - 640) / GRID_SIZE)
       );
 
       const currentPiece = pieces.find((p) =>
