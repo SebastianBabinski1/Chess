@@ -127,8 +127,6 @@ const Chessboard = ({ mode, setPlayer }: Props) => {
           const tile = document.getElementById(id);
           tile?.classList.add("possible");
         });
-      } else {
-        console.log(mode);
       }
 
       setActivePiece(element);
@@ -290,7 +288,7 @@ const Chessboard = ({ mode, setPlayer }: Props) => {
                         JSON.stringify(updatedPieces)
                       );
 
-                      const indexOfPiece = piecesCopy.forEach((p, index) => {
+                      piecesCopy.forEach((p, index) => {
                         if (samePosition(p.position, piece.position) === true) {
                           piecesCopy[index].position = possibleMove;
                           const isCheckAfterPossibleMove =
@@ -311,16 +309,13 @@ const Chessboard = ({ mode, setPlayer }: Props) => {
               [] as Piece[]
             );
 
-            if (allPossibleEnemyMovesAfterUpdate.length > 0) {
-              console.log("Są możliwe ruchy przeciwnika");
-            } else {
+            if (allPossibleEnemyMovesAfterUpdate.length <= 0) {
               // Before we check if isCheck is not currentPlayer, so now if isCheck is undefined its tie
               if (isCheck === undefined) {
                 // Tie
                 $("#tie-modal").modal("show");
               } else {
                 // Check mate
-                console.log("checkmate");
                 setPlayer(currentPlayer);
                 $("#win-modal").modal("show");
               }

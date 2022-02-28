@@ -3,18 +3,18 @@
     place-content: center;
     width: 80px;
     height: 80px;
+
   }
   
+  .tile img {
+    width: 50px;
+  }
   .black-tile {
     background-color: #779556;
   }
   
   .white-tile {
     background-color: #ebecd0;
-  }
-  
-  .tile img {
-    width: 50px;
   }
   
   .tile .chess-piece {
