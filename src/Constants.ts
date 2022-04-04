@@ -1,7 +1,11 @@
 export const VERTICAL_AXIS = [1, 2, 3, 4, 5, 6, 7, 8];
 export const HORIZONTAL_AXIS = ["a", "b", "c", "d", "e", "f", "g", "h"];
 
-export const GRID_SIZE = 80;
+// window.addEventListener("resize", (e) => {
+//   window.innerWidth > 768 ? (GRID_SIZE = 80) : (GRID_SIZE = 60);
+// });
+
+export let GRID_SIZE = 30;
 
 export function samePosition(p1: Position, p2: Position) {
   return p1.x === p2.x && p1.y === p2.y;

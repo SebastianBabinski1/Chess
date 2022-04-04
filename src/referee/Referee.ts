@@ -47,8 +47,6 @@ export default class Referee {
   // TODO
   // Prevent to move king into danger (king cant move near another king)
   // Add castling
-  // Add checkmate
-  // Add stalemate
 
   isValidMove(
     initialPosition: Position,
